@@ -23,10 +23,10 @@ import scala.language.higherKinds
   */
 object IdiomEars {
   /** open bracket, start of an idiomatic expression */
-  def ⊏|[B, A] (func: A => B) = Begin(func)
+  def ⊏|[A, B](func: A => B) = Begin(func)
 
   /** ascii alias for `⊏|` */
-  def *|[B, A] (func: A => B) = ⊏| (func)
+  def *|[A, B](func: A => B) = ⊏|(func)
 
   case class Begin[A, B](func: A => B) {
     // we don't want to infer which idiom `F` we're in until we see the 1st arg.
@@ -38,7 +38,7 @@ object IdiomEars {
    * We still delay asking for the `Applicative[F]` until we the end,
    * where we can do it inside an implicit conversion.
    * if `A` is a function, we can continue the expression using `ContinueOp.apply`.
-   * otherwise we can end it with `CloseOps.|⊐` or `|*`.
+   * otherwise we can end it with `EndOps.|⊐` or `|*`.
    */
   case class Inside[F[_], A](build: Applicative[F] => F[A])
 
@@ -46,9 +46,9 @@ object IdiomEars {
     def apply(b: F[B]) = Inside[F, C](F => F.ap(a.build(F))(b))
   }
 
-  implicit class CloseOps[F[_], A](fa: Inside[F, A])(implicit F: Applicative[F]) {
+  implicit class EndOps[F[_], A](a: Inside[F, A])(implicit F: Applicative[F]) {
     /** close bracket, end of idiomatic expression */
-    val |⊐ = fa.build(F)
+    val |⊐ = a.build(F)
     /** ascii alias for `|⊐` */
     val |* = |⊐
   }

@@ -41,10 +41,9 @@ class IdiomEarsTest extends FlatSpec with Matchers with GeneratorDrivenPropertyC
           |⊐
         )
       val expected =
-        F.pure(f)
-            .ap(a)
+        (F.pure(f) ap a)
             .ap(
-              F.pure(f).ap(a).ap(b)
+              F.pure(f) ap a ap b
             )
       result should equal (expected)
     }
