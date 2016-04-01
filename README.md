@@ -8,7 +8,7 @@ Allows the following syntax for `Applicative`s like `Option`, `List`, etc.:
 
 ```scala
 import cats.std.list._
-import IdiomEars._
+import com.samthomson.idiomears._
 ```
 ```scala
 val f = (a: Int) => (b: Int) => a * b
@@ -31,3 +31,15 @@ Unicode is cute, but annoying to type, so there's the ascii alternative:
 ```
 
 If you're against symbolic operators, which you probably should be, just don't use this.
+
+
+SBT
+---
+
+Add the following lines to your `build.sbt`:
+
+```sbt
+resolvers += Resolver.bintrayRepo("sammthomson", "maven")
+
+libraryDependencies += "com.samthomson" %% "idiomears" % "1.0"
+```

@@ -1,3 +1,5 @@
+package com.samthomson.idiomears
+
 import cats.Applicative
 
 import scala.language.higherKinds
@@ -24,7 +26,6 @@ import scala.language.higherKinds
 object IdiomEars {
   /** open bracket, start of an idiomatic expression */
   def ⊏|[A, B](func: A => B) = Begin(func)
-
   /** ascii alias for `⊏|` */
   def *|[A, B](func: A => B) = ⊏|(func)
 

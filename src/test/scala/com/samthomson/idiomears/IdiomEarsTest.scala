@@ -1,9 +1,10 @@
-import IdiomEars._
+package com.samthomson.idiomears
+
 import cats.Applicative
 import cats.std.all._
 import cats.syntax.apply._
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.language.postfixOps
 
